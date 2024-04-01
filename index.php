@@ -38,6 +38,11 @@ if ($_SERVER["PHP_SELF"] == "POST") {
                     $('#doit').append(#todo);
                 }
            </script>";
+           echo "<script>
+                $(document).ready(function){
+                    $('#time').append();
+                }
+           </script>";
         }
 
 
@@ -68,8 +73,8 @@ if ($_SERVER["PHP_SELF"] == "POST") {
                                 <td class="fa" >Action</td>
                             </thead>
                             <tbody>
-                                <tr></tr>
-                                <tr></tr>
+                                <tr id="doit"></tr>
+                                <tr id="time"></tr>
                                 <tr></tr>
                             </tbody>
                         </table>
