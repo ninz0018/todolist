@@ -14,55 +14,18 @@
     <title>TodoList</title>
 </head>
 <body>
-<?php
 
-if ($_SERVER["PHP_SELF"] == "POST") {
-    $todo = $_POST["todo"];
-    $add = $_POST["add"];
-
-    try {
-        require_once "process/dhp.php";
-
-        $query = "INSERT INTO todo (do) VALUES(:todo);";
-
-        $stmt = $pdo->prepare($query);
-
-        $stmt->bindParam(":todo", $todo);
-
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if (!empty($todo)) {
-           echo "<script>
-                $(document).ready(function){
-                    $('#doit').append(#todo);
-                }
-           </script>";
-           echo "<script>
-                $(document).ready(function){
-                    $('#time').append();
-                }
-           </script>";
-        }
-
-
-
-    } catch(PDOException $e) {
-    die("Query Failed: " . $e->getMessage());
-}
-
-}
-
-?>
     <div class="d-flex justify-content-center align-items-center" >
         <div class="col-8 mt-4">
             <div class="d-flex justify-content-center align-items-center fa" >
                 <h1>TODOLIST</h1>
             </div><br>
             <div>
-                <form action="adding.php" method="post" class="d-flex justify-content-center align-items-center">
+                <form action="" method="post" class="d-flex justify-content-center align-items-center">
                     <label for="todo" class="fa me-2" >TODO:</label>
-                    <input name="todo" type="text" id="todo" class="rounded col-8 me-2" placeholder="What do you want to do?">
+                    <input name="todo" type="text" id="todo" class="rounded col-5 me-2" placeholder="What do you want to do?">
+                    <label for="oras" class="fa me-2" >TIME:</label>
+                    <input name="oras" type="text" id="oras" class="rounded col-2 me-2" placeholder="INPUT TIME">
                     <button name="add" class="hov btn btn-warning fa" >Enter</button>
                 </form><br>
                     <div>
@@ -73,14 +36,15 @@ if ($_SERVER["PHP_SELF"] == "POST") {
                                 <td class="fa" >Action</td>
                             </thead>
                             <tbody>
-                                <tr id="doit"></tr>
-                                <tr id="time"></tr>
+                                <tr>
+                                 
+                                </tr>                         
+                                <tr></tr>
                                 <tr></tr>
                             </tbody>
                         </table>
                     </div>
             </div>
-    
         </div>
     </div>
 </body>
