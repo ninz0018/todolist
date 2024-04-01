@@ -1,0 +1,4 @@
+.hov:hover {
+    transform: scale(1.2);
+    background-color: rgb(255, 93, 93);
+}
