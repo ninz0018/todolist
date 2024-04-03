@@ -56,9 +56,7 @@
                                                 $stmt->execute(); 
 
                                                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                                if (!$result) {
-
+                                              
                                                     $query1 = "SELECT dos FROM todo";
 
                                                     $stmt1 = $pdo->prepare($query1);
@@ -66,12 +64,17 @@
                                                     $stmt1->execute();
 
                                                     $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
-     
-                                                   
-                                                } else {
-                                                    echo "EMPTY";
-                                                }                                                
-                                            }
+
+                                                
+                                                    echo "<script>
+                                                    $(document).on('click', '#add', function(e){
+                                                        e.preventDefault();
+                                                        let s = $('#todo').val();
+                                                        $('#doing').append(s);
+                                                    });
+                                                    </script>";
+                                                
+                                           }
                                                  
                                            /*    echo "<script>
                                                     $(document).on('click', '#add', function(e){
