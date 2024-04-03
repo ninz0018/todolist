@@ -57,23 +57,18 @@
 
                                                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                               
-                                                    $query1 = "SELECT dos FROM todo";
+                                                    $query1 = "SELECT * FROM todo WHERE dos = :todo";
 
                                                     $stmt1 = $pdo->prepare($query1);
+
+                                                    $stmt1->bindParam(":todo", $tod);
 
                                                     $stmt1->execute();
 
                                                     $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
                                                 
-                                                    echo "<script>
-                                                    $(document).on('click', '#add', function(e){
-                                                        e.preventDefault();
-                                                        let s = $('#todo').val();
-                                                        $('#doing').append(s);
-                                                    });
-                                                    </script>";
-                                                
+                                                    echo "<div>". $result1 . "</div";
                                            }
                                                  
                                            /*    echo "<script>
