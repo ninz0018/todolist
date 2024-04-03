@@ -21,12 +21,12 @@
                 <h1>TODOLIST</h1>
             </div><br>
             <div>
-                <form action="" method="post" class="d-flex justify-content-center align-items-center">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="d-flex justify-content-center align-items-center">
                     <label for="todo" class="fa me-2" >TODO:</label>
-                    <input name="todo" type="text" id="todo" class="rounded col-5 me-2" placeholder="What do you want to do?">
+                    <input name="todo" type="text" id="todo" class="rounded col-5 me-2" placeholder="What do you want to do?" required>
                     <label for="oras" class="fa me-2" >TIME:</label>
                     <input name="oras" type="text" id="oras" class="rounded col-2 me-2" placeholder="INPUT TIME">
-                    <button name="add" class="hov btn btn-warning fa" >Enter</button>
+                    <button name="add" class="hov btn btn-warning fa" id="add" >Enter</button>
                 </form><br>
                     <div>
                         <table class="table" >
@@ -36,8 +36,44 @@
                                 <td class="fa" >Action</td>
                             </thead>
                             <tbody>
-                                <tr>
-                                 
+                                <tr id="doing">
+                                <?php
+
+                                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                            $tod = $_POST["todo"];
+
+                                            try {
+                                                require_once "process/dhp.inc.php";
+
+                                                if (!empty($tod)) {
+                                                
+                                                $query = "INSERT INTO todo (dos) VALUES(:todo);";
+                                                
+                                                $stmt = $pdo->prepare($query);
+                                                
+                                                $stmt->bindParam(":todo", $tod);
+                                                
+                                                $stmt->execute(); 
+                                                 
+                                               echo "<script>
+                                                    $(document).on('click', '#add', function(e){
+                                                        e.preventDefault();
+                                                        let s = $('#todo').val();
+                                                        $('#doing').append(s);
+                                                    });
+                                                    </script>";
+                                                   
+                                                } else {
+                                                    echo "EMPTY";
+                                                }
+
+                                            } catch(PDOException $e) {
+                                            die("Query Failed: " . $e->getMessage());
+                                        }
+
+                                        }
+
+                                 ?>
                                 </tr>                         
                                 <tr></tr>
                                 <tr></tr>
